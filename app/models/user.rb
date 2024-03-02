@@ -8,7 +8,7 @@
 #  encrypted_password     :string           default(""), not null
 #  likes_count            :integer
 #  photo_count            :integer          default(0)
-#  private                :boolean
+#  private                :boolean          default(FALSE)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -31,10 +31,10 @@ class User < ApplicationRecord
          has_many :comments, foreign_key: "author_id"
   
          has_many :sent_follow_requests, foreign_key: :sender_id, class_name: "FollowRequest"
-         has_many :accepted_sent_follow_request, -> {where(status: "accepted")}, foreign_key: :sender_id, class_name: "FollowRequest"
+         has_many :accepted_sent_follow_request, -> { accepted}, foreign_key: :sender_id, class_name: "FollowRequest"
 
          has_many :recieved_follow_requests, foreign_key: :recipient_id, class_name: "FollowRequest"
-         has_many :accepted_received_follow_requests, -> { where(status: "accepted") }, foreign_key: :recipient_id, class_name: "FollowRequest"
+         has_many :accepted_received_follow_requests, -> { accepted }, foreign_key: :recipient_id, class_name: "FollowRequest"
 
          has_many :liked_photos, through: :likes, source: :photo
 
@@ -42,7 +42,9 @@ class User < ApplicationRecord
          has_many :followers, through: :accepted_received_follow_requests, source: :recipient
 
          has_many :feed, through: :leaders, source: :own_photos
-         
+
          has_many :discover, through: :leaders, source: :liked_photos
+
+         validates :username, presence: true, uniqueness: true
 
 end

@@ -5,7 +5,7 @@ class CreateLikes < ActiveRecord::Migration[7.0]
       t.references :photo, null: false, foreign_key: true
 
       t.timestamps
+      end
     end
   end
 end
-
