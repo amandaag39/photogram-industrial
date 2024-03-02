@@ -22,6 +22,8 @@
 class Photo < ApplicationRecord
 belongs_to :owner, class_name: "User", counter_cache: true
 has_many :comments
+has_many :likes
+has_many :own_photos, foreign_key: :owner_id, class_name: "Photo"
+has_many :fans, through: :likes
+
 end
-
-
