@@ -25,8 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_02_192325) do
   end
 
   create_table "follow_requests", force: :cascade do |t|
-    t.bigint "recipient_id", null: false
-    t.bigint "sender_id", null: false
+    t.bigint "recipient_id"
+    t.bigint "sender_id"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
