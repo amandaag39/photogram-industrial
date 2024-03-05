@@ -17,6 +17,20 @@ task sample_data: :environment do
   
   # Create fake user data
 
+  usernames = Array.new { Faker::Name.first_name }
+
+  usernames << "alice"
+  usernames << "bob"
+
+  usernames.each do |username|
+    User.create(
+      email: "#{username}@example.com",
+      password: "password",
+      username: username.downcase,
+      private: [true, false].sample,
+    )
+  end
+
   12.times do
     name = Faker::Name.first_name.downcase
     u = User.create(
