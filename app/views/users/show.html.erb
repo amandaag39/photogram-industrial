@@ -8,10 +8,10 @@
 
     <ul class="nav nav-pills nav-justified">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Posts</a>
+        <%= link_to "Posts", user_path(@user.username), class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Liked photos</a>
+        <%= link_to "Liked Photos", liked_path(@user.username), class: "nav-link" %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Feed</a>
