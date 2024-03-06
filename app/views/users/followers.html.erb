@@ -1,4 +1,4 @@
-<!-- app/views/users/show.html.erb -->
+<!-- app/views/users/followers.html.erb -->
 
 <div class="row">
   <div class="col md-6 offset-3">
@@ -26,6 +26,12 @@
   </div>
 </div>
 
-<% @user.own_photos.each do |photo| %>
-  <%= render "photos/photo", photo: photo %>
-<% end %>
+<div class="container">
+  <ul class="list-group">
+    <% @user.followers.each do |follower| %>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to follower.username, user_path(follower.username) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
